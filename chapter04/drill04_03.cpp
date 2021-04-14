@@ -5,7 +5,7 @@ int main()
 {
     double val = 0;
 
-    // HUOM! 1/100 is 0 not 0.01  you should put 1.0 / 100 or 1 / 100.0
+    // beware 1/100 != 0.01, it's 0 because of (int / int)
     constexpr double cm_per_m = 0.01;
     constexpr double in_per_m = 2.54 * cm_per_m;
     constexpr double ft_per_m = 12 * in_per_m;
@@ -14,7 +14,7 @@ int main()
     int count = 0;
 
     vector<double> vals;
-    cout << cm_per_m << '\t' << in_per_m << '\t' << ft_per_m << '\n';
+
     cout << "Please enter a number and a unit(cm, m, in, or ft).\n";
 
     while (cin >> val >> unit)
@@ -26,24 +26,20 @@ int main()
             if (unit == "cm")
             {
                 val *= cm_per_m;
-                // cout << val << '\n'; // 왜 이거 0이 나옴??
             }
             else if (unit == "in")
             {
                 val *= in_per_m;
-                // cout << val << '\n';
             }
             else if (unit == "ft")
             {
                 val *= ft_per_m;
-                // cout << val << '\n';
             }
 
             vals.push_back(val);
 
             sum += val;
             ++count;
-            // keep track of the sum of values entered
         }
 
         // exclude illegal unit input
