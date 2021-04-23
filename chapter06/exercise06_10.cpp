@@ -20,8 +20,8 @@ int permutation(int a, int b)
     return factorial(a) / factorial(a - b);
 }
 
-// computation operation
-int computation(int a, int b)
+// combination operation
+int combination(int a, int b)
 {
     return permutation(a, b) / factorial(b);
 }
@@ -33,7 +33,7 @@ int main()
 
         int a;
         int b;
-        cout << "~ Welcome to permutation, computation calculator ~\n";
+        cout << "~ Welcome to permutation, combination calculator ~\n";
 
         // take user input of two positive integers (int a, int b)
         cout << "Please enter two positive integers, a and b, for operation\n"
@@ -59,9 +59,9 @@ int main()
         cout << "Which operation would you like to execute?\n";
         while (!is_chosen)
         {
-            // asks users to choose between permutation and computation ('p' or 'c')
+            // asks users to choose between permutation and combination ('p' or 'c')
             cout << "press p or P followed by enter for permutation,\n"
-                 << "press c or C followed by enter for computation.\n";
+                 << "press c or C followed by enter for combination.\n";
             cin >> selection;
 
             if (selection == 'P' || selection == 'C')
@@ -80,10 +80,10 @@ int main()
                 is_chosen = true;
                 break;
 
-            // computation is chosen call the function
+            // combination is chosen call the function
             case 'c':
-                result = computation(a, b);
-                chosen = "computation : C(";
+                result = combination(a, b);
+                chosen = "combination : C(";
                 is_chosen = true;
                 break;
 

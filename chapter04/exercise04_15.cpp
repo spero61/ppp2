@@ -2,9 +2,6 @@
 
 // Modify the program described in the previous exercise
 // to take an input value max and then find all prime numbers from 1 to max.
-
-// find all the prime numbers between 1 and 100
-// by using “Sieve of Eratosthenes” method
 #include "std_lib_facilities.h"
 
 int find_smallest_index(vector<int> numbers);
