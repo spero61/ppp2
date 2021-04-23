@@ -14,7 +14,7 @@ int main()
     cout << "Please enter name, score pairs (e.g. Kris 99)\n"
          << "you can terminate input with NoName 0\n";
 
-    while (name != "NoName" && score != 0)
+    while (name != "NoName" || score != 0)
     {
         cin >> name >> score;
         // check that each name is unique
