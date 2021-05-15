@@ -23,3 +23,8 @@ _Bjarne, Stroustrup. Programming (pp. 53-54). Pearson Education. Kindle Edition.
 **"I simply like C++ as a language for writing elegant and efficient code."**
 
 _Bjarne, Stroustrup. Programming (p. xxvi). Pearson Education. Kindle Edition._
+
+## Code format style
+
+chapter 3-8 : Visual Studio
+chapter 9-cwd : Google with indentWidth: 4
