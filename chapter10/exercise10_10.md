@@ -9,11 +9,11 @@ Discuss how you would use these commands for testing.
 
 ## Implementations
 
-[exercise10_11_input.txt](https://github.com/spero61/ppp2/blob/main/chapter10/exercise10_11_input.txt)
+[exercise10_10_input.txt](https://github.com/spero61/ppp2/blob/main/chapter10/exercise10_10_input.txt)
 
 [exercise10_10.cpp](https://github.com/spero61/ppp2/blob/main/chapter10/exercise10_10.cpp)
 
-[exercise10_11_output.txt](https://github.com/spero61/ppp2/blob/main/chapter10/exercise10_11_output.txt)
+[exercise10_10_output.txt](https://github.com/spero61/ppp2/blob/main/chapter10/exercise10_10_output.txt)
 
 ## Thought
 
