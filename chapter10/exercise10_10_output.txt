@@ -1,0 +1,13 @@
+answer: 2053
+answer: 0.75
+answer: 42
+answer: 1.41421
+answer: 1.73205
+answer: 1024
+answer: 81
+answer: 3.14159
+answer: 2.71828
+answer: 4
+answer: 7
+answer: 28
+answer: get: undefined name log
