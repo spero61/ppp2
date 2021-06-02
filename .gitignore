@@ -33,6 +33,7 @@
 
 # Visual Studio Code stuff
 .vscode/
+.vs/
 
 # textbook specific header file
 std_lib_facilities.h

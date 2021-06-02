@@ -20,6 +20,10 @@ _Bjarne, Stroustrup. Programming (pp. 53-54). Pearson Education. Kindle Edition.
 
 [official website for the textbook](https://www.stroustrup.com/programming.html)
 
+[supporting information](https://www.stroustrup.com/programming_support.html)
+
+[Installing FLTK with Visual Studio 2019](https://alf-p-steinbach.github.io/Install-FLTK-for-use-with-Visual-C-/#3-build-the-library-with-visual-studio-2019)
+
 **"I simply like C++ as a language for writing elegant and efficient code."**
 
 _Bjarne, Stroustrup. Programming (p. xxvi). Pearson Education. Kindle Edition._

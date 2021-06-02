@@ -1,0 +1,13 @@
+~ Character Classification Stats ~
+
+isspace:   18758	whitespace
+isalpha:   68207	a letter
+isdigit:      96	a decimal digit
+isxdigit:  20819	a hexadecimal digit
+isupper:    2063	an uppercase
+islower:   66144	a lowercase
+isalnum:   68303	isalnum
+iscntrl:    1892	a control character
+ispunct:    3313	ispunct
+isprint:   88482	printable
+isgraph:   71616	not space
