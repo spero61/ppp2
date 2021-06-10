@@ -16,19 +16,20 @@ using namespace std;
 inline void keep_window_open() { char ch; cin>>ch; }
 ```
 
-_Bjarne, Stroustrup. Programming (pp. 53-54). Pearson Education. Kindle Edition._
-
 [official website for the textbook](https://www.stroustrup.com/programming.html)
 
 [supporting information](https://www.stroustrup.com/programming_support.html)
 
 [Installing FLTK with Visual Studio 2019](https://alf-p-steinbach.github.io/Install-FLTK-for-use-with-Visual-C-/#3-build-the-library-with-visual-studio-2019)
 
-**"I simply like C++ as a language for writing elegant and efficient code."**
+I used FLTK 1.3.6 with Visual Studio 2019 on Windows 10 (20H2)
 
-_Bjarne, Stroustrup. Programming (p. xxvi). Pearson Education. Kindle Edition._
+> **"I simply like C++ as a language for writing elegant and efficient code."**
+>
+> _Bjarne, Stroustrup. Programming (p. xxvi). Pearson Education. Kindle Edition._
 
 ## Code format style
 
 chapter 3-8 : Visual Studio
+
 chapter 9-cwd : Google with indentWidth: 4
