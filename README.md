@@ -16,7 +16,7 @@ using namespace std;
 inline void keep_window_open() { char ch; cin>>ch; }
 ```
 
-_Bjarne, Stroustrup. Programming (pp. 53-54). Pearson Education. Kindle Edition. _
+_Bjarne, Stroustrup. Programming (pp. 53-54). Pearson Education. Kindle Edition._
 
 [official website for the textbook](https://www.stroustrup.com/programming.html)
 
