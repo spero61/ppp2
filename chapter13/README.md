@@ -128,11 +128,12 @@
 
     [exercise13_19.cpp](https://github.com/spero61/ppp2/blob/main/chapter13/exercise13_19.cpp)
 
-    ![screenshot13_19](https://github.com/spero61/ppp2/blob/main/chapter13/screenshot13_19.gif)
+    ![screenshot13_19](https://github.com/spero61/ppp2/blob/main/chapter13/screenshot13_19.png)
 
 ## Wisdom
 
 > The member c is initialized by each constructor. You could argue that **c** is too short and too obscure a name to use, but since it is used only within the small scope of **Color** and not intended for general use, that’s probably OK. We made the member **c** private to protect it from direct use from our users.
+>
 > _Bjarne, Stroustrup. Programming (p. 452). Pearson Education. Kindle Edition._
 
 ## Postscript
