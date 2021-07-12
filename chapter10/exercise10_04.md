@@ -9,8 +9,8 @@ converting the Celsius readings to Fahrenheit before putting them into the vecto
 
 ## Comment
 
-To distinguish the output file I named it as [raw_temps_uusi.txt](https://github.com/spero61/ppp2/blob/main/chapter10/raw_temps_uusi.txt)
+To distinguish the output file I named it as [raw_temps_uusi.txt](./raw_temps_uusi.txt)
 
-[store_temps.cpp](https://github.com/spero61/ppp2/blob/main/chapter10/store_temps.cpp)
+- [store_temps.cpp](./store_temps.cpp)
 
-[temp_stats.cpp](https://github.com/spero61/ppp2/blob/main/chapter10/temp_stats.cpp)
+- [temp_stats.cpp](./temp_stats.cpp)

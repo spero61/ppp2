@@ -13,16 +13,16 @@ with what you get by converting it to binary and back.
 
 ### program part 1
 
-Input: [little_prince.txt](https://github.com/spero61/ppp2/blob/main/chapter11/little_prince.txt)
+- Input: [little_prince.txt](./little_prince.txt)
 
-Text to binary: [exercise11_09_txt_to_bin.cpp](https://github.com/spero61/ppp2/blob/main/chapter11/exercise11_09_txt_to_bin.cpp)
+- Text to binary: [exercise11_09_txt_to_bin.cpp](./exercise11_09_txt_to_bin.cpp)
 
-Output: [exercise11_09.bin](https://github.com/spero61/ppp2/blob/main/chapter11/exercise11_09.bin)
+- Output: [exercise11_09.bin](./exercise11_09.bin)
 
 ### program part 2
 
-Input: [exercise11_09.bin](https://github.com/spero61/ppp2/blob/main/chapter11/exercise11_09.bin)
+- Input: [exercise11_09.bin](./exercise11_09.bin)
 
-Binary to text: [exercise11_09_bin_to_txt.cpp](https://github.com/spero61/ppp2/blob/main/chapter11/exercise11_09_bin_to_txt.cpp)
+- Binary to text: [exercise11_09_bin_to_txt.cpp](./exercise11_09_bin_to_txt.cpp)
 
-Output: [exercise11_09.txt](https://github.com/spero61/ppp2/blob/main/chapter11/exercise11_09.txt)
+- Output: [exercise11_09.txt](./exercise11_09.txt)

@@ -15,8 +15,9 @@ Be sure to reject dates outside the range we can represent that way
 
 Implement those from §9.8.
 
-[Chrono.h](https://github.com/spero61/ppp2/blob/main/chapter09/Chrono.h)
-[Chrono.cpp](https://github.com/spero61/ppp2/blob/main/chapter09/Chrono.cpp)
+- [Chrono.h](./Chrono.h)
+
+- [Chrono.cpp](./Chrono.cpp)
 
 ## Comment
 
@@ -27,5 +28,5 @@ I need to revise the Chrono thoroughly.
 I will try to come back and do the exercise again later.
 
 > However, we hope that we have provided exercises that are hard enough to challenge anybody and enough exercises to exhaust even the best student’s available time. We do not expect you to do them all, but feel free to try.
-
-_Bjarne, Stroustrup. Programming (p. 5). Pearson Education. Kindle Edition._
+>
+> _Bjarne, Stroustrup. Programming (p. 5). Pearson Education. Kindle Edition._

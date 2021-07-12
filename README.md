@@ -26,8 +26,6 @@ inline void keep_window_open() { char ch; cin>>ch; }
 
 [How to compile FLTK](https://bumpyroadtocode.com/2017/08/29/how-to-install-and-use-fltk-1-3-4-in-visual-studio-2017-complete-guide-2-0-no-cross-contamination)
 
-I used FLTK 1.3.6 with Visual Studio 2019 on Windows 10 (20H2)
-
 > **"I simply like C++ as a language for writing elegant and efficient code."**
 >
 > _Bjarne, Stroustrup. Programming (p. xxvi). Pearson Education. Kindle Edition._
@@ -37,3 +35,7 @@ I used FLTK 1.3.6 with Visual Studio 2019 on Windows 10 (20H2)
 chapter 3-8 : Visual Studio
 
 chapter 9-cwd : Google with indentWidth: 4
+
+## Note
+
+I used FLTK 1.3.6 with Visual Studio 2019 on Windows 10 (20H2)

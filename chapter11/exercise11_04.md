@@ -15,4 +15,4 @@ Then your program should output the values in properly spaced columns like this:
 
 ## Implementations
 
-[multi_input.cpp](https://github.com/spero61/ppp2/blob/main/chapter11/multi_input.cpp)
+- [multi_input.cpp](./multi_input.cpp)

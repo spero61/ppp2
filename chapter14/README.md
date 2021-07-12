@@ -4,61 +4,67 @@
 
 - [drill14.md](./drill14.md)
 
-## Selected Exercises
+## Exercises \( _few are without screenshots_ \)
 
 1. [exercise14_01.cpp](./exercise14_01.cpp)
 
    ![screenshot14_01](./screenshot14_01.png)
 
-2. [exercise14_05.cpp](./exercise14_05.cpp)
+2. [exercise14_02.cpp](./exercise14_02.cpp)
+
+3. [exercise14_03.cpp](./exercise14_03.cpp)
+
+4. [exercise14_04.cpp](./exercise14_04.cpp)
+
+5. [exercise14_05.cpp](./exercise14_05.cpp)
 
    ![screenshot14_05](./screenshot14_05.png)
 
-3. [exercise14_06.cpp](./exercise14_06.cpp)
+6. [exercise14_06.cpp](./exercise14_06.cpp)
 
    ![screenshot14_06](./screenshot14_06.png)
 
-4. [exercise14_07.cpp](./exercise14_07.cpp)
+7. [exercise14_07.cpp](./exercise14_07.cpp)
 
    ![screenshot14_07](./screenshot14_07.gif)
 
-5. [exercise14_08.cpp](./exercise14_08.cpp)
+8. [exercise14_08.cpp](./exercise14_08.cpp)
 
    ![screenshot14_08](./screenshot14_08.gif)
 
-6. [exercise14_09.cpp](./exercise14_09.cpp)
+9. [exercise14_09.cpp](./exercise14_09.cpp)
 
    ![screenshot14_09](./screenshot14_09.gif)
 
-7. [exercise14_10.cpp](./exercise14_10.cpp)
+10. [exercise14_10.cpp](./exercise14_10.cpp)
 
-   ![screenshot14_10](./screenshot14_10.gif)
+    ![screenshot14_10](./screenshot14_10.gif)
 
-8. [exercise14_11.cpp](./exercise14_11.cpp)
+11. [exercise14_11.cpp](./exercise14_11.cpp)
 
-   ![screenshot14_11](./screenshot14_11.png)
+    ![screenshot14_11](./screenshot14_11.png)
 
-9. [exercise14_12.cpp](./exercise14_12.cpp)
+12. [exercise14_12.cpp](./exercise14_12.cpp)
 
-   ![screenshot14_12](./screenshot14_12.gif)
+    ![screenshot14_12](./screenshot14_12.gif)
 
-10. [exercise14_13.cpp](./exercise14_13.cpp)
+13. [exercise14_13.cpp](./exercise14_13.cpp)
 
     ![screenshot14_13](./screenshot14_13.gif)
 
-11. [exercise14_14.cpp](./exercise14_14.cpp)
+14. [exercise14_14.cpp](./exercise14_14.cpp)
 
     ![screenshot14_14](./screenshot14_14.png)
 
-12. [exercise14_15.cpp](./exercise14_15.cpp)
+15. [exercise14_15.cpp](./exercise14_15.cpp)
 
     ![screenshot14_15](./screenshot14_15.png)
 
-13. [exercise14_16.cpp](./exercise14_16.cpp)
+16. [exercise14_16.cpp](./exercise14_16.cpp)
 
     ![screenshot14_16](./screenshot14_16.gif)
 
-14. [exercise14_17.cpp](./exercise14_17.cpp)
+17. [exercise14_17.cpp](./exercise14_17.cpp)
 
     ![screenshot14_17](./screenshot14_17.png)
 

@@ -8,6 +8,6 @@ For testing, fill the file with at least 50 "temperature readings."
 
 Call this program **store_temps.cpp** and the file it creates **raw_temps.txt**
 
-[store_temps_ex02.cpp](https://github.com/spero61/ppp2/blob/main/chapter10/store_temps_ex02.cpp)
+- [store_temps_ex02.cpp](./store_temps_ex02.cpp)
 
-[raw_temps.txt](https://github.com/spero61/ppp2/blob/main/chapter10/raw_temps.txt)
+- [raw_temps.txt](./raw_temps.txt)

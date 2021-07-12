@@ -19,22 +19,27 @@ Test each version with at least one invalid date (e.g., 2004, 13, –5).
 
 _Bjarne, Stroustrup.Programming(p.338).Pearson Education.Kindle Edition._
 
-[Chrono.h](https://github.com/spero61/ppp2/blob/main/chapter09/Chrono.h)
-[Chrono.cpp](https://github.com/spero61/ppp2/blob/main/chapter09/Chrono.cpp)
+- [Chrono.h](./Chrono.h)
+
+- [Chrono.cpp](./Chrono.cpp)
 
 ## Implementations
 
 1. The version from §9.4.1
-   [drill09_01.cpp](https://github.com/spero61/ppp2/blob/main/chapter09/drill09_01.cpp)
+
+   [drill09_01.cpp](./drill09_01.cpp)
 
 2. The version from §9.4.2
-   [drill09_02.cpp](https://github.com/spero61/ppp2/blob/main/chapter09/drill09_02.cpp)
+
+   [drill09_02.cpp](./drill09_02.cpp)
 
 3. The version from §9.4.3
-   [drill09_03.cpp](https://github.com/spero61/ppp2/blob/main/chapter09/drill09_03.cpp)
+
+   [drill09_03.cpp](./drill09_03.cpp)
 
 4. The version from §9.7.1
-   [drill09_04.cpp](https://github.com/spero61/ppp2/blob/main/chapter09/drill09_04.cpp)
+
+   [drill09_04.cpp](./drill09_04.cpp)
 
 5. The version from §9.7.4
    The version from 9.7.4 const member functions
@@ -54,5 +59,5 @@ Implementing those are not infeasible, however, as the author mentioned on page 
 I would follow Dr. Stroustrup's advice.
 
 > "When we program, we always have to ask ourselves what is good enough for a given application. We usually don’t have the luxury of being able to search “forever” for the perfect solution after we have already found one that is good enough. Search further, and we might even come up with something that’s so elaborate that it is worse than the simple early solution. This is one meaning of the saying **“_The best is the enemy of the good_” (Voltaire).**"
-
-_Bjarne, Stroustrup.Programming(p.338).Pearson Education.Kindle Edition._
+>
+> _Bjarne, Stroustrup.Programming(p.338).Pearson Education.Kindle Edition._
