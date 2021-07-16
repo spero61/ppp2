@@ -21,17 +21,17 @@
 
   ![screenshot_book15_02_double.gif](./screenshot_book15_02_double.gif)
 
-- [Graphing data: Aging Japan](./book15_03.cpp)
+- [Graphing data: Aging Japan](./book15_03.cpp) \(_Input file_: [japanese-age-data.txt](./japanese-age-data.txt)\)
 
   ![screenshot_book15_03.png](./screenshot_book15_03.png)
 
 ### Bonus
 
-- [Bonus: Aging Japan in more detail](./book15_04_jp.cpp)
+- [Bonus: Aging Japan in more detail](./book15_04_jp.cpp) \(_Input file_:\_ [japanese-age-data-detail.txt](./japanese-age-data-detail.txt)\)
 
   ![screenshot_book15_04_jp.png](./screenshot_book15_04_jp.png)
 
-- [Bonus: Aging Korea](./book15_04_kr.cpp)
+- [Bonus: Aging Korea](./book15_04_kr.cpp) \(_Input file_: [korean-age-data-detail.txt](./korean-age-data-detail.txt)\)
 
   ![screenshot_book15_04_kr.png](./screenshot_book15_04_kr.png)
 
@@ -75,17 +75,17 @@
 
    ![screenshot15_07.png](./screenshot15_07.png)
 
-8. [exercise15_08.cpp](./exercise15_08.cpp)
+8. [exercise15_08.cpp](./exercise15_08.cpp) \(_Input file_: [heights-data.txt](./heights-data.txt)\)
 
    ![screenshot15_08.png](./screenshot15_08.png)
 
-9. [exercise15_09.cpp](./exercise15_09.cpp)
+9. [exercise15_09.cpp](./exercise15_09.cpp) \(_Input file_: [korean-age-data-detail.txt](./korean-age-data-detail.txt)\)
 
    ![screenshot15_09.png](./screenshot15_09.png)
 
 10. [exercise15_10.md](./exercise15_10.md)
 
-11. [exercise15_11.cpp](./exercise15_11.cpp)
+11. [exercise15_11.cpp](./exercise15_11.cpp) \(_Input file_: [temperature-data.txt](./temperature-data.txt)\)
 
     ![screenshot15_11.png](./screenshot15_11.png)
 

@@ -1,6 +1,16 @@
-# Programming: Principles and Practice Using C++
+# Programming: Principles and Practice Using C++ 2nd Edition
 
-## Drills and Exercises
+## Graphics chapters
+
+### [Chapter 12: A Display Model](./chapter12/README.md)
+
+### [Chapter 13: Graphics Classes](./chapter13/README.md)
+
+### [Chapter 14: Graphics Class Design](./chapter14/README.md)
+
+### [Chapter 15: Graphing Functions and Data](./chapter15/README.md)
+
+### [Chapter 16: Graphical User Interfaces](./chapter16/README.md)
 
 ["std_lib_facilities.h" header file for early chapters](https://www.stroustrup.com/Programming/std_lib_facilities.h)
 
