@@ -11,40 +11,53 @@
 #include "Simple_window.h"
 #include "std_lib_facilities.h"
 
-// #include <stdio.h>
-// #include <time.h>
-#include <chrono>
-#include <cmath>
-// #include <iostream>
-#include <thread>
+// #include <chrono>
+// #include <thread>
 
 constexpr double PI{3.14159265358979};
 
-class Clock_Base : public Shape {
+class Clock_window : public Window  // Lines_window inherits from Window
+{
    public:
-    Clock_Base(Point center, int radius);
-    void draw_lines() const override;
+    Clock_window(Point xy, int w, int h, const string& title, Point center, int radius);  // declare constructor
+
     Point center() { return c; }
     int radius() { return r; }
 
    private:
+    // data:
     Point c;  // center
     int r;    // radius
     Circle frame;
-    Vector_ref<Line> second_lines;  // to depict marks for every seconds and minutes
-    Vector_ref<Line> hour_lines;    // to depict marks for every hour
-    Vector_ref<Text> hour_labels;   // labels for numerals
+    Vector_ref<Graph_lib::Line> second_lines;  // to depict marks for every seconds and minutes
+    Vector_ref<Graph_lib::Line> hour_lines;    // to depict marks for every hour
+    Vector_ref<Graph_lib::Text> hour_labels;   // labels for numerals
+    // widgets:
+    Button draw_button;  // draw analog clock
+    Button quit_button;  // end program
+
+    void draw_clock_base();  // draw clock base(frame, second_lines, hour_lines, and hour_labels)
+    void quit() { hide(); }  // curious FLTK idiom to delete window
 };
 
-Clock_Base::Clock_Base(Point center, int radius)
-    : c{center}, r{radius}, frame{c, r} {
-    if (r < 50) {
-        error("error: radius for Clock_Base is too small.\nProvide the radius greater than or equal to 50");
-    }
+Clock_window::Clock_window(Point xy, int w, int h, const string& title, Point center, int radius)
+    : Window{xy, w, h, title}, c{center}, r{radius}, frame{c, r},
+      // construct/initialize the parts of the window:
+      // location, size, name, action (using lambda expressions)
+      draw_button{Point{x_max() - 150, 0}, 70, 20, "Draw", [](Address, Address pw) { reference_to<Clock_window>(pw).draw_clock_base(); }},
+      quit_button{Point{x_max() - 70, 0}, 70, 20, "Quit", [](Address, Address pw) { reference_to<Clock_window>(pw).quit(); }} {
+    attach(draw_button);
+    attach(quit_button);
+}
 
-    add(c);
-    frame.set_style(Line_style{Line_style::solid, 3});
-    frame.set_color(Color::dark_blue);
+void Clock_window::draw_clock_base() {
+    if (r < 100) {
+        error("error: radius for frame is too small.\nProvide the radius greater than or equal to 100");
+    }
+    frame.set_style(Line_style{Line_style::solid, 5});
+    frame.set_color(Color{8});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
+    frame.set_fill_color(Color::black);
+    attach(frame);
 
     for (int i = 0; i < 60; ++i)  // seconds or minutes
     {
@@ -55,11 +68,14 @@ Clock_Base::Clock_Base(Point center, int radius)
         const int d2{r};
         const int x2{static_cast<int>(c.x + d2 * sin(6 * i * PI / 180.0))};  // degrees: 6 * i
         const int y2{static_cast<int>(c.y - d2 * cos(6 * i * PI / 180.0))};
-        second_lines.push_back(new Line{Point{x1, y1}, Point{x2, y2}});
+
+        second_lines.push_back(new Graph_lib::Line{Point{x1, y1}, Point{x2, y2}});
+        second_lines[second_lines.size() - 1].set_color(Color{20});
         second_lines[second_lines.size() - 1].set_style(Line_style{Line_style::solid, 2});
+        attach(second_lines[second_lines.size() - 1]);
     }
-    int index{1};                 // for hour_lables
-    for (int i = 0; i < 12; ++i)  // hours
+    vector<int> labels{12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};  // for hour_lables
+    for (int i = 0; i < 12; ++i)                                // hours
     {
         // overwrite hour_labels on seconds_labels for simplicity
         const int d1{static_cast<int>(r * 0.9)};                              // distance from the center of a circle
@@ -69,81 +85,36 @@ Clock_Base::Clock_Base(Point center, int radius)
         const int d2{r};
         const int x2{static_cast<int>(c.x + d2 * sin(30 * i * PI / 180.0))};  // degrees: 30 * i
         const int y2{static_cast<int>(c.y - d2 * cos(30 * i * PI / 180.0))};
-        hour_lines.push_back(new Line{Point{x1, y1}, Point{x2, y2}});
+        hour_lines.push_back(new Graph_lib::Line{Point{x1, y1}, Point{x2, y2}});
+        hour_lines[hour_lines.size() - 1].set_color(Color{20});
         hour_lines[hour_lines.size() - 1].set_style(Line_style{Line_style::solid, 7});
+        attach(hour_lines[hour_lines.size() - 1]);
 
         const int d3{static_cast<int>(r * 0.8)};                              // distance from the center of a circle
         const int x3{static_cast<int>(c.x + d3 * sin(30 * i * PI / 180.0))};  // degrees: 30 * i
         const int y3{static_cast<int>(c.y - d3 * cos(30 * i * PI / 180.0))};
-        hour_labels.push_back(new Text{Point{x3, y3}, to_string(index++)});
-        hour_labels[hour_labels.size() - 1].set_font(Font::times_bold);
-        hour_labels[hour_labels.size() - 1].set_font_size(30);
-        hour_labels[hour_labels.size() - 1].move(-8, 9);  // to adjust the location caused by narrow casting
+        hour_labels.push_back(new Graph_lib::Text{Point{x3, y3}, to_string(labels[i])});
+        hour_labels[hour_labels.size() - 1].set_color(Color::white);
+        hour_labels[hour_labels.size() - 1].set_font(Font::helvetica_bold);
+        hour_labels[hour_labels.size() - 1].set_font_size(35);
+        hour_labels[hour_labels.size() - 1].move(-10, 14);  // to adjust the location caused by narrow casting
+        attach(hour_labels[hour_labels.size() - 1]);
     }
-}
-
-void Clock_Base::draw_lines() const {
-    frame.draw();
-
-    for (int i = 0; i < second_lines.size(); ++i) {
-        second_lines[i].draw();
-    }
-
-    for (int i = 0; i < hour_lines.size(); ++i) {
-        hour_lines[i].draw();
-    }
-
-    for (int i = 0; i < hour_labels.size(); ++i) {
-        hour_labels[i].draw();
-    }
-}
-
-class Clock_window : public Window  // Lines_window inherits from Window
-{
-   public:
-    Clock_window(Point xy, int w, int h, const string& title);  // declare constructor
-
-   private:
-    // data:
-    Clock_Base clock_base;
-    // widgets:
-    Button quit_button;  // end program
-
-    void quit() { hide(); }  // curious FLTK idiom to delete window
-};
-
-Clock_window::Clock_window(Point xy, int w, int h, const string& title)
-    : Window{xy, w, h, title},
-      clock_base{Point{x_max() / 2, y_max() / 2}, 100},
-      // construct/initialize the parts of the window:
-      // location, size, name, action (using lambda expressions)
-      quit_button{Point{x_max() - 70, 0}, 70, 20, "Quit", [](Address, Address pw) { reference_to<Clock_window>(pw).quit(); }} {
-    attach(clock_base);
-    attach(quit_button);
+    // individual adjustment for two characters label
+    hour_labels[0].move(-7, -2);   // hour label: 12 hour
+    hour_labels[10].move(-4, -2);  // hour label: 10
+    hour_labels[11].move(-4, -2);  // hour label: 11
+    redraw();
 }
 
 int main() {
     try {
-        //time_t current_time = chrono::system_clock::to_time_t(chrono::system_clock::now()); // https://en.cppreference.com/w/cpp/chrono/time_point/time_since_epoch
-        //string now = ctime(&current_time);
-        //cout << "The current time: " << now;
+        constexpr int width{800};
+        constexpr int height{800};
+        constexpr int radius{300};
 
-        //for (int i = 0; i < now.size(); ++i) {
-        //    cout << '[' << i << "]: " << now[i] << endl;
-        //}
-
-        // for debugging the Clock_Base class
-
-        Point tl{100, 100};  // top-left
-        Simple_window win{tl, 800, 800, "Histogram class"};
-        win.wait_for_button();
-
-        Clock_Base clock_base{Point{400, 400}, 200};
-        win.attach(clock_base);
-        win.wait_for_button();
-
-        //Clock_window win{ Point{100, 100}, 800, 800, "Analog Clock" };
-        //return gui_main();
+        Clock_window win{Point{100, 100}, width, height, "Analog Clock", Point{width / 2, height / 2}, radius};
+        return gui_main();
     } catch (exception& e) {
         cerr << "exception: " << e.what() << '\n';
         return 1;
