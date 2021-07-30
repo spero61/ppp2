@@ -22,7 +22,6 @@ class Lines_window : public Window  // Lines_window inherits from Window
     Out_box xy_out;
 
     Menu color_menu;
-    Menu line_style_menu;
     Button menu_button;
 
     void change(Color c) { lines.set_color(c); }
@@ -80,10 +79,6 @@ Lines_window::Lines_window(Point xy, int w, int h, const string& title)
     lines.set_color(Color::black);  // default color
 }
 
-void Lines_window::quit() {
-    hide();  // curious FLTK idiom to delete window
-}
-
 void Lines_window::next() {
     int x = next_x.get_int();
     int y = next_y.get_int();
@@ -94,6 +89,10 @@ void Lines_window::next() {
     ss << '(' << x << ", " << y << ')';
     xy_out.put(ss.str());
     redraw();
+}
+
+void Lines_window::quit() {
+    hide();  // curious FLTK idiom to delete window
 }
 
 int main() {
