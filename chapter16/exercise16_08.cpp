@@ -14,7 +14,7 @@ enum class Currency {
     KRW
 };
 
-int Currency_to_int(Currency unit) {
+int currency_to_int(Currency unit) {
     switch (unit) {
         case Currency::USD:
             return 0;
@@ -27,7 +27,7 @@ int Currency_to_int(Currency unit) {
         case Currency::KRW:
             return 4;
         default:
-            error("error: Currency_to_int()");
+            error("error: currency_to_int()");
             return -1;
     }
 }
@@ -37,12 +37,13 @@ constexpr int num_of_units{5};
 class Currency_Converter : public Window  // Lines_window inherits from Window
 {
    public:
-    Currency_Converter(Point xy);  // declare constructor
+    Currency_Converter(Point xy, const string& input_filename);  // declare constructor
 
    private:
     // data:
-    double conversion_rates[num_of_units][num_of_units];               // https://en.cppreference.com/w/c/string/multibyte/char16_t
-    string units[num_of_units] = {u8"$", u8"€", u8"¥", u8"£", u8"₩"};  //  REVIEW: Does not work with character literal, char16_t for instance, but why?
+    string iname;                                                // input filename (text file)
+    double conversion_rates[num_of_units][num_of_units];         // https://en.cppreference.com/w/c/string/multibyte/char16_t
+    vector<string> units = {u8"$", u8"€", u8"¥", u8"£", u8"₩"};  //  REVIEW: Does not work with character literal, char16_t for instance, but why?
     Currency input_unit;
     Currency output_unit;
 
@@ -73,14 +74,15 @@ class Currency_Converter : public Window  // Lines_window inherits from Window
         output_menu.show();
     }
 
-    void calc();
-    void quit();
+    void calc();             // calculate using a conversion rate and show the result on output_amount (Out_box)
+    void quit() { hide(); }  // https://www.fltk.org/doc-1.3/classFl__Window.html#acd69a335bdc69f5624301f267ca7f94e
 };
 
-Currency_Converter::Currency_Converter(Point xy)
+Currency_Converter::Currency_Converter(Point xy, const string& input_filename)
     : Window{xy, 600, 400, "Currency Converter"},
+      iname{input_filename},
       input_unit{Currency::USD},
-      output_unit{Currency::EUR},
+      output_unit{Currency::EUR},  // set defaults
       // construct/initialize the parts of the window:
       // location, size, name, action (using lambda expressions)
       quit_button{Point{x_max() - 70, 0}, 70, 20, "Quit", [](Address, Address pw) { reference_to<Currency_Converter>(pw).quit(); }},  // quit button
@@ -97,17 +99,33 @@ Currency_Converter::Currency_Converter(Point xy)
       output_menu_button{Point{x_max() / 2 + 115, 200}, 140, 30, "Select Currency", [](Address, Address pw) { reference_to<Currency_Converter>(pw).output_menu_pressed(); }}
 
 {
-    // To do: read conversion rates from a file
-    for (int i = 0; i < num_of_units; ++i) {
-        for (int j = 0; j < num_of_units; ++j) {
-            conversion_rates[i][j] = 2;
-        }
+    // currency conversion rates' source: https://www.xe.com/  Jul 30, 2021, 16:50-16:56 UTC
+    // read conversion rates from a file then save to double conversion_rates[][]
+    ifstream ist{iname};
+    if (!ist) error("can't open input file: ", iname);
+    ist.exceptions(ist.exceptions() | ios_base::badbit);  // throw for bad()
+
+    // vector<string> tmps to keep space separated values temporarily
+    vector<string> tmps;
+    for (string str; ist >> str;) {
+        tmps.push_back(str);
     }
 
+    // initialize 2d-array named conversion_rates
+    int index{0};
+    for (int i = 0; i < num_of_units; ++i) {
+        for (int j = 0; j < num_of_units; ++j) {
+            conversion_rates[i][j] = stod(tmps[index++]);  // https://www.cplusplus.com/reference/string/stod/
+        }
+    }
+    if (ist.eof()) ist.clear();
+    if (ist.fail()) error("get_words() failed: ", iname);
+
+    // attach the parts to the window
     attach(quit_button);
     attach(input_currency);
     attach(input_amount);
-    attach(calc_button);  // attach the parts to the window
+    attach(calc_button);
     attach(output_currency);
     attach(output_amount);
     // order by trading volumes (descending order)
@@ -137,8 +155,8 @@ Currency_Converter::Currency_Converter(Point xy)
 void Currency_Converter::set_input_items(Currency unit) {
     input_menu.hide();
     input_menu_button.show();
-
     input_unit = unit;
+    calc();
 
     switch (unit) {
         case Currency::USD:
@@ -165,8 +183,8 @@ void Currency_Converter::set_input_items(Currency unit) {
 void Currency_Converter::set_output_items(Currency unit) {
     output_menu.hide();
     output_menu_button.show();
-
     output_unit = unit;
+    calc();
 
     switch (unit) {
         case Currency::USD:
@@ -191,11 +209,11 @@ void Currency_Converter::set_output_items(Currency unit) {
 }
 
 void Currency_Converter::calc() {
-    // test
     string input_amt = input_amount.get_string();
 
-    const int input_index = Currency_to_int(input_unit);
-    const int output_index = Currency_to_int(output_unit);
+    // safer conversion helper function enum class to int (compared to direct conversion from enum to int)
+    const int input_index = currency_to_int(input_unit);
+    const int output_index = currency_to_int(output_unit);
 
     double output_amt = stod(input_amt) * conversion_rates[input_index][output_index];
 
@@ -204,13 +222,9 @@ void Currency_Converter::calc() {
     output_amount.put(ss.str());
 }
 
-void Currency_Converter::quit() {
-    hide();  // curious FLTK idiom to delete window
-}
-
 int main() {
     try {
-        Currency_Converter win{Point{100, 100}};
+        Currency_Converter win{Point{100, 100}, "exercise16_08_input.txt"};
         return gui_main();
     } catch (exception& e) {
         cerr << "exception: " << e.what() << '\n';
