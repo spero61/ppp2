@@ -1,4 +1,4 @@
-// Currency converter
+// Currency converter (Simple version)
 
 #include "GUI.h"
 #include "Graph.h"
@@ -32,7 +32,8 @@ int currency_to_int(Currency unit) {
     }
 }
 
-constexpr int num_of_units{5};
+vector<string> text_flags{"flag_USA.jpg", "flag_EUR.jpg", "flag_JPN.jpg", "flag_GBR.jpg", "flag_KOR.jpg"};
+constexpr int num_of_currencies{5};
 
 class Currency_Converter : public Window  // Lines_window inherits from Window
 {
@@ -41,11 +42,13 @@ class Currency_Converter : public Window  // Lines_window inherits from Window
 
    private:
     // data:
-    string iname;                                                // input filename (text file)
-    double conversion_rates[num_of_units][num_of_units];         // https://en.cppreference.com/w/c/string/multibyte/char16_t
-    vector<string> units = {u8"$", u8"€", u8"¥", u8"£", u8"₩"};  //  REVIEW: Does not work with character literal, char16_t for instance, but why?
+    string iname;                                                   // input filename (text file)
+    double conversion_rates[num_of_currencies][num_of_currencies];  // https://en.cppreference.com/w/c/string/multibyte/char16_t
+    vector<string> units = {u8"$", u8"€", u8"¥", u8"£", u8"₩"};     //  REVIEW: Does not work with character literal, char16_t for instance, but why?
     Currency input_unit;
     Currency output_unit;
+    Vector_ref<Image> input_flags;
+    Vector_ref<Image> output_flags;
 
     // widgets:
     Button calc_button;  // add (next_x, next_y) to lines
@@ -87,18 +90,25 @@ Currency_Converter::Currency_Converter(Point xy, const string& input_filename)
       // location, size, name, action (using lambda expressions)
       quit_button{Point{x_max() - 70, 0}, 70, 20, "Quit", [](Address, Address pw) { reference_to<Currency_Converter>(pw).quit(); }},  // quit button
 
-      input_currency{Point{x_max() / 2 - 260, 150}, 40, 20, ""},
-      input_amount{Point{x_max() / 2 - 220, 150}, 110, 20, ""},
-      calc_button{Point{x_max() / 2 - 60, 200}, 120, 60, "Calculate", [](Address, Address pw) { reference_to<Currency_Converter>(pw).calc(); }},
-      output_currency{Point{x_max() / 2 + 120, 150}, 40, 20, ""},
-      output_amount{Point{x_max() / 2 + 160, 150}, 110, 20, ""},
-      input_menu{Point{x_max() / 2 - 265, 200}, 140, 30, Menu::vertical, "Input menu"},
-      input_menu_button{Point{x_max() / 2 - 265, 200}, 140, 30, "Select Currency", [](Address, Address pw) { reference_to<Currency_Converter>(pw).input_menu_pressed(); }},
+      input_currency{Point{x_max() / 2 - 225 - 40, 150}, 40, 20, ""},
+      input_amount{Point{x_max() / 2 - 225, 150}, 150, 20, ""},
 
-      output_menu{Point{x_max() / 2 + 115, 200}, 140, 30, Menu::vertical, "Output menu"},
-      output_menu_button{Point{x_max() / 2 + 115, 200}, 140, 30, "Select Currency", [](Address, Address pw) { reference_to<Currency_Converter>(pw).output_menu_pressed(); }}
+      calc_button{Point{x_max() / 2 - 60, 250}, 120, 50, "Calculate", [](Address, Address pw) { reference_to<Currency_Converter>(pw).calc(); }},
+
+      output_currency{Point{x_max() / 2 + 115 - 40, 150}, 40, 20, ""},
+      output_amount{Point{x_max() / 2 + 115, 150}, 150, 20, ""},
+      input_menu{Point{x_max() / 2 - 240, 200}, 140, 30, Menu::vertical, "Input menu"},
+      input_menu_button{Point{x_max() / 2 - 240, 200}, 140, 30, "Select Currency", [](Address, Address pw) { reference_to<Currency_Converter>(pw).input_menu_pressed(); }},
+
+      output_menu{Point{x_max() / 2 + 100, 200}, 140, 30, Menu::vertical, "Output menu"},
+      output_menu_button{Point{x_max() / 2 + 100, 200}, 140, 30, "Select Currency", [](Address, Address pw) { reference_to<Currency_Converter>(pw).output_menu_pressed(); }}
 
 {
+    for (int i = 0; i < num_of_currencies; ++i) {
+        input_flags.push_back(new Image{Point{x_max() / 2 - 200, 80}, text_flags[i]});
+        output_flags.push_back(new Image{Point{x_max() / 2 + 140, 80}, text_flags[i]});
+    }
+
     // currency conversion rates' source: https://www.xe.com/  Jul 30, 2021, 16:50-16:56 UTC
     // read conversion rates from a file then save to double conversion_rates[][]
     ifstream ist{iname};
@@ -113,8 +123,8 @@ Currency_Converter::Currency_Converter(Point xy, const string& input_filename)
 
     // initialize 2d-array named conversion_rates
     int index{0};
-    for (int i = 0; i < num_of_units; ++i) {
-        for (int j = 0; j < num_of_units; ++j) {
+    for (int i = 0; i < num_of_currencies; ++i) {
+        for (int j = 0; j < num_of_currencies; ++j) {
             conversion_rates[i][j] = stod(tmps[index++]);  // https://www.cplusplus.com/reference/string/stod/
         }
     }
@@ -149,7 +159,10 @@ Currency_Converter::Currency_Converter(Point xy, const string& input_filename)
     input_menu.hide();
     output_menu.hide();
     input_currency.put(u8"USD  $");
+    attach(input_flags[0]);
     output_currency.put(u8"EUR  €");
+    attach(output_flags[1]);
+    output_amount.put(0);
 }
 
 void Currency_Converter::set_input_items(Currency unit) {
@@ -218,8 +231,11 @@ void Currency_Converter::calc() {
     double output_amt = stod(input_amt) * conversion_rates[input_index][output_index];
 
     ostringstream ss;
-    ss << units[output_index] << ' ' << fixed << setprecision(2) << output_amt;
+    ss << units[output_index] << ' ' << fixed << setprecision(2) << output_amt;  // this causes surprises when you input amount is too small
     output_amount.put(ss.str());
+
+    attach(input_flags[input_index]);
+    attach(output_flags[output_index]);
 }
 
 int main() {
