@@ -137,10 +137,10 @@ Plot_window::Plot_window(Point xy, int w, int h, const string& title)
     axes.push_back(new Axis{Axis::x, Point{10, y_orig}, x_axis_length, static_cast<int>(x_axis_length / x_scale), "range [-10:11)"});
     axes.push_back(new Axis{Axis::y, Point{x_orig, y_axis_length + 40}, y_axis_length, static_cast<int>(y_axis_length / y_scale), "one notch == 1"});
     // attach the parts to the window
-    axes[0].label.move(-220, 5);
+    axes[0].label.move(-240, 5);
     axes[1].label.move(30, 10);
-    axes[0].set_color(Color{208});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
-    axes[1].set_color(Color{242});
+    axes[0].set_color(Color{33});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
+    axes[1].set_color(Color{33});
     attach(axes[0]);  // x axis
     attach(axes[1]);  // y axis
 
@@ -267,7 +267,8 @@ void Plot_window::plot() {
     mt19937_64 gen(rd());                                                // https://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine
     uniform_int_distribution<int> rd_color{0, 24};                       // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
     graphs[graphs.size() - 1].set_color(Color{59 + rd_color(gen) * 8});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
-    graphs[graphs.size() - 1].set_style(Line_style{Line_style::solid, 2});
+    attach(graphs[graphs.size() - 1]);
+    redraw();
 }
 
 void Plot_window::hide_menu() {
