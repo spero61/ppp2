@@ -223,50 +223,53 @@ void Plot_window::plot() {
         case Graph_type::linear:
             set_parameter_values(true, true, false);
             graphs.push_back(new Function{calc_linear, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{209});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::quadratic:
             set_parameter_values(true, true, true);
             graphs.push_back(new Function{calc_quadratic, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{220});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::cubic:
             set_parameter_values(true, true, true);
             graphs.push_back(new Function{calc_cubic, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{61});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::sin:
             set_parameter_values(true, true, true);
             graphs.push_back(new Function{calc_sin, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{95});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::cos:
             set_parameter_values(true, true, true);
             graphs.push_back(new Function{calc_cos, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{183});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::tan:
             set_parameter_values(true, true, true);
             graphs.push_back(new Function{calc_tan, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{72});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::log:
             // no need for set_parameter_values() function as it does not need parameters
             graphs.push_back(new Function{log, 0.000001, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{203});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
 
         case Graph_type::exp:
             // no need for set_parameter_values() function as it does not need parameters
             graphs.push_back(new Function{exp, r_min, r_max, orig, n_points, x_scale, y_scale});
+            graphs[graphs.size() - 1].set_color(Color{90});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
             break;
         default:
             error("error: Plot_window: something wrong with Graph_type::selected_graph variable");
     }
-
-    random_device rd;                                                    // https://en.cppreference.com/w/cpp/numeric/random/random_device
-    mt19937_64 gen(rd());                                                // https://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine
-    uniform_int_distribution<int> rd_color{0, 24};                       // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
-    graphs[graphs.size() - 1].set_color(Color{59 + rd_color(gen) * 8});  // https://www.fltk.org/doc-1.3/fltk-colormap.png
     attach(graphs[graphs.size() - 1]);
     redraw();
 }
@@ -294,21 +297,18 @@ void Plot_window::toggle_parameter_input(bool a, bool b, bool c) {
         parameter_c.show();
     else
         parameter_c.hide();
-    // redraw();
 };
 
 void Plot_window::set_parameter_values(bool a, bool b, bool c) {
-    // get_int() returns -999999 when it is not a digit
     if (a) coef_a = stod(parameter_a.get_string());
     if (b) coef_b = stod(parameter_b.get_string());
-    if (c) coef_b = stod(parameter_c.get_string());
+    if (c) coef_c = stod(parameter_c.get_string());
 }
 
 int main() {
     try {
-        Plot_window win{Point{100, 100}, 800, 800, "Calculator with GUI"};
+        Plot_window win{Point{100, 100}, 800, 800, "Plotting graphs"};
         return gui_main();
-
     } catch (exception& e) {
         cerr << "exception: " << e.what() << '\n';
         return 1;
