@@ -51,7 +51,7 @@ class Currency_Converter : public Window  // Lines_window inherits from Window
     Vector_ref<Image> output_flags;
 
     // widgets:
-    Button calc_button;  // add (next_x, next_y) to lines
+    Button calc_button;  // perform calculation then show its result on Out_box output_amount
     Button quit_button;  // end program
 
     Out_box input_currency;
