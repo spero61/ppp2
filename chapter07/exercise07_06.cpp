@@ -455,7 +455,7 @@ void print_help_messages() {
          << "to set a variable by using : let variable name = n\n"
          << "you can also define const similarly : const variable name = n\n"
          << "there are functions (pow(n, m) and sqrt(n)\n"
-         << "predifined number k for 1000, pi, and e \n"
+         << "predefined number k for 1000, pi, and e \n"
          << "enter ';' or just enter for print the result.\n\n";
 }
 
@@ -487,7 +487,7 @@ void calculate() {
 
 int main() {
     try {
-        // predifine var_table:
+        // predefine var_table:
         st.define_name("k", 1000, true);
         st.define_name("pi", 3.14159265358979, true);
         st.define_name("e", 2.718281828459, true);

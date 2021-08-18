@@ -448,7 +448,7 @@ void calculate() {
          << "Operators at your disposal (+, -, *, and / )\n"
          << "and you can use parenthesis as well.\n"
          << "to set a variable by using : # variable name = n\n"
-         << "(pow(n, m) and sqrt(n), predifined number pi and e \n"
+         << "(pow(n, m) and sqrt(n), predefined number pi and e \n"
          << "enter ';' for print the result and 'Q' for quit)\n\n";
     while (true)
         try {
@@ -468,7 +468,7 @@ void calculate() {
 
 int main() {
     try {
-        // predifine var_table:
+        // predefine var_table:
         st.define_name("k", 1000, true);
         st.define_name("pi", 3.14159265358979, true);
         st.define_name("e", 2.718281828459, true);
