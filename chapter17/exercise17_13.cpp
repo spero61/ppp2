@@ -20,7 +20,6 @@ bool operator==(const God& a, const God& b) {
 bool operator!=(const God& a, const God& b) {
     return !(a == b);
 }
-
 ostream& operator<<(ostream& os, const God& g) {
     return os << "{ " << g.name << ", " << g.mythology << ", " << g.vehicle << ", " << g.weapon << " }";
 }
@@ -77,7 +76,7 @@ Link* Link::find(const string& s) {
     Link* p = this;
     while (p) {
         if (p->god.name == s) return p;
-        // if (strcmp(p->god.name.c_str(), s.c_str()) == 0) return p;
+        // if (strcmp(p->god.name.c_str(), s.c_str()) == 0) return p; // same
         p = p->succ;
     }
     return nullptr;
@@ -112,8 +111,31 @@ const Link* Link::advance(int n) const {  // this operation does not change the 
 }
 
 Link* Link::add_ordered(Link* n) {
-    // To do
-    return nullptr;
+    if (n == nullptr) return this;
+    if (this == nullptr) return n;
+    Link* p = this;
+    while (p->prev) p = p->prev;  // pointer points to the first (top) element
+
+    // special case when n becomes the first element (top of the list)
+    if (strcmp(p->god.name.c_str(), n->god.name.c_str()) > 0) {  // if p->god.name comes later than n->god.name (https://www.cplusplus.com/reference/cstring/strcmp)
+        p->insert(n);                                            // n comes earlier than p
+        return n;                                                // this is important! return n not p
+    }
+
+    // from below, deals with the case n is NOT the first element
+    while (p->succ) {
+        p = p->succ;                                                 // check the next element (successor) to the last
+        if (strcmp(p->god.name.c_str(), n->god.name.c_str()) > 0) {  // if p->god.name comes later than n->god.name (https://www.cplusplus.com/reference/cstring/strcmp)
+            p->insert(n);                                            // n comes earlier than p
+            while (p->prev) p = p->prev;                             // pointer points to the first (top) element
+            return p;
+        }
+    }
+
+    // if n is the last in lexicographically order
+    p->add(n);                    // place to the last (at the bottom in prompt)
+    while (p->prev) p = p->prev;  // pointer points to the first (top) element
+    return p;
 }
 
 void print_all(Link* p) {
@@ -133,29 +155,29 @@ int main() {
     try {
         // make gods list from three mythologies
         Link* gods = new Link{God{"Zeus", "Greek", "none", "lightning"}};
-        gods = gods->insert(new Link{God{"Hera", "Greek"}});
-        gods = gods->insert(new Link{God{"Poseidon", "Greek"}});
-        gods = gods->insert(new Link{God{"Demeter", "Greek"}});
-        gods = gods->insert(new Link{God{"Athena", "Greek"}});
-        gods = gods->insert(new Link{God{"Apollon", "Greek"}});
-        gods = gods->insert(new Link{God{"Artemis", "Greek"}});
-        gods = gods->insert(new Link{God{"Ares", "Greek"}});
-        gods = gods->insert(new Link{God{"Aphrodite", "Greek"}});
-        gods = gods->insert(new Link{God{"Hermes", "Greek"}});
-        gods = gods->insert(new Link{God{"Hephaistos", "Greek"}});
-        gods = gods->insert(new Link{God{"Hestia", "Greek"}});
+        gods = gods->insert(new Link{God{"Hera", "Greek", "none", "Pelt"}});
+        gods = gods->insert(new Link{God{"Poseidon", "Greek", "horse", "Trident"}});
+        gods = gods->insert(new Link{God{"Demeter", "Greek", "none", "Agriculture"}});
+        gods = gods->insert(new Link{God{"Athena", "Greek", "none", "Aegis"}});
+        gods = gods->insert(new Link{God{"Apollo", "Greek", "none", "Lyre"}});
+        gods = gods->insert(new Link{God{"Artemis", "Greek", "none", "Bow and Arrow"}});
+        gods = gods->insert(new Link{God{"Ares", "Greek", "none", "Spear and Helmet"}});
+        gods = gods->insert(new Link{God{"Aphrodite", "Greek", "The Dove", "Magical Girdle"}});
+        gods = gods->insert(new Link{God{"Hermes", "Greek", "Winged Sandals", "Winged Helmet"}});
+        gods = gods->insert(new Link{God{"Hephaistos", "Greek", "none", "Hammer and Anvil"}});
+        gods = gods->insert(new Link{God{"Hestia", "Greek", "none", "Flames and Fire"}});
         gods = gods->insert(new Link{God{"Odin", "Norse", "Sleipner", "Gungnir"}});
-        gods = gods->insert(new Link{God{"Frigg", "Norse"}});
-        gods = gods->insert(new Link{God{"Baldr", "Norse"}});
-        gods = gods->insert(new Link{God{"Freyja", "Norse"}});
-        gods = gods->insert(new Link{God{"Thor", "Norse", "Chariot", "Mjolnir"}});   // it's Mjölnir though
-        gods = gods->insert(new Link{God{"Loki", "Norse", "none", "Laevatein"}});    // Lævateinn
-        gods = gods->insert(new Link{God{"Tyr", "Norse"}});                          // Týr
-        gods = gods->insert(new Link{God{"Ukko", "Finnish", "none", "lightning"}});  // Ukko on ylijumala!
+        gods = gods->insert(new Link{God{"Frigg", "Norse", "none", "Clairvoyance"}});
+        gods = gods->insert(new Link{God{"Baldr", "Norse", "none", "Bravely"}});
+        gods = gods->insert(new Link{God{"Freyja", "Norse", "none", "Brisingamen"}});
+        gods = gods->insert(new Link{God{"Thor", "Norse", "Chariot", "Mjolnir"}});    // it's Mjölnir though
+        gods = gods->insert(new Link{God{"Loki", "Norse", "none", "Laevatein"}});     // Lævateinn
+        gods = gods->insert(new Link{God{"Tyr", "Norse"}});                           // Týr
+        gods = gods->insert(new Link{God{"Ukko", "Finnish", "none", "Ukonvasara"}});  // Ukko on ylijumala!
         gods = gods->insert(new Link{God{"Ahti", "Finnish"}});
         gods = gods->insert(new Link{God{"Kuu", "Finnish"}});
         gods = gods->insert(new Link{God{"Pekko", "Finnish"}});
-        gods = gods->insert(new Link{God{"Perkele", "Finnish", "none", "thunder"}});
+        gods = gods->insert(new Link{God{"Perkele", "Finnish", "none", "Thunder"}});
         gods = gods->insert(new Link{God{"Tapio", "Finnish"}});
         gods = gods->insert(new Link{God{"Mielikki", "Finnish"}});
         cout << "~ gods from three mythologies ~\n";
@@ -164,7 +186,7 @@ int main() {
 
         // this C-style array is used for loop when moving elements (deliberately did not use vector for practice)
         string norse_names[] = {"Odin", "Frigg", "Baldr", "Freyja", "Thor", "Loki", "Tyr"};
-        string greek_names[] = {"Zeus", "Hera", "Poseidon", "Demeter", "Athena", "Apollon", "Artemis", "Ares", "Aphrodite", "Hermes", "Hephaistos", "Hestia"};
+        string greek_names[] = {"Zeus", "Hera", "Poseidon", "Demeter", "Athena", "Apollo", "Artemis", "Ares", "Aphrodite", "Hermes", "Hephaistos", "Hestia"};
         string finnish_names[] = {"Ukko", "Ahti", "Kuu", "Pekko", "Perkele", "Tapio", "Mielikki"};
 
         // calculate the element size of the array, respectively
@@ -175,10 +197,8 @@ int main() {
         // Norse gods
         Link* norse_gods{nullptr};
         for (int i = 0; i < norse_size; ++i) {
-            norse_gods = norse_gods->insert(new Link{gods->find(norse_names[i])->god});
+            norse_gods = norse_gods->add_ordered(new Link{gods->find(norse_names[i])->god});
             gods->find(norse_names[i])->erase();
-            // greek_gods = greek_gods->add_ordered(tmp);
-            // gods-> find(greek_names[i])->erase();
         }
         cout << "\n\n~ Norse gods ~\n";
         print_all(norse_gods);
@@ -186,10 +206,8 @@ int main() {
         // Greek gods
         Link* greek_gods{nullptr};
         for (int i = 0; i < greek_size; ++i) {
-            greek_gods = greek_gods->insert(new Link{gods->find(greek_names[i])->god});
+            greek_gods = greek_gods->add_ordered(new Link{gods->find(greek_names[i])->god});
             gods->find(greek_names[i])->erase();
-            // greek_gods = greek_gods->add_ordered(tmp);
-            // gods-> find(greek_names[i])->erase();
         }
         cout << "\n\n~ Greek gods ~\n";
         print_all(greek_gods);
@@ -197,10 +215,8 @@ int main() {
         // Finnish gods
         Link* finnish_gods{nullptr};
         for (int i = 0; i < finnish_size; ++i) {
-            finnish_gods = finnish_gods->insert(new Link{gods->find(finnish_names[i])->god});
+            finnish_gods = finnish_gods->add_ordered(new Link{gods->find(finnish_names[i])->god});
             gods->find(finnish_names[i])->erase();
-            // finnish_gods = finnish_gods->add_ordered(tmp);
-            // gods-> find(finnish_names[i])->erase();
         }
         cout << "\n\n~ Finnish gods ~\n";
         print_all(finnish_gods);
