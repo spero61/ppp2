@@ -5,17 +5,17 @@
 // instead of strlen()
 int string_length(const char* s) {
     int count = 0;
-    while (*s != '\0') {
-        count++;
-        *s++;
+    while (*s) {
+        ++count;
+        ++s;
     }
     return count;
 }
 
 char* strdup(const char* s) {
     int n = string_length(s);
-    char* dup = new char[n];
-    for (int i = 0; i < n; ++i) {
+    char* dup = new char[n + 1];       // should be n + 1 NOT n because of '\0' (null character of the string)
+    for (int i = 0; i < n + 1; ++i) {  // when i = n, it copies the null character to indicate the end of the string
         dup[i] = s[i];
     }
     return dup;
