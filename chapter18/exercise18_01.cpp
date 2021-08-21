@@ -12,15 +12,14 @@ int string_length(const char* s) {
 }
 
 char* strdup(const char* s) {
-    int n = string_length(s);
-    char* dup = new char[n + 1];  // n + 1: because it needs one more byte for the null character '\0'
+    int n = string_length(s) + 1;  // + 1 is for the space for '\0' (null character of the string)
+    char* dup = new char[n];
     // deal with the case until n (copy contents of the string)
     for (int i = 0; i < n; ++i) {
         *dup++ = *s++;
+        if (i == n - 1) *dup = '\0';  // when it is the last space for the array, end the C-style string with the null character
     }
-    // deal with the n+1 th value to mark end of the string
-    *dup = '\0';  // end the C-style string with the null character '\0'
-    dup -= n;     // let the dup pointer to indicate the first char of the C-style string (since did not move the pointer when )
+    dup -= n;  // let the dup pointer to indicate the first char of the C-style string (since did not move the pointer when )
     return dup;
 }
 
