@@ -4,9 +4,9 @@
 // instead of strlen()
 int string_length(const char* s) {
     int count = 0;
-    while (*s != '\0') {
-        count++;
-        *s++;
+    while (*s) {
+        ++count;
+        ++s;
     }
     return count;
 }
