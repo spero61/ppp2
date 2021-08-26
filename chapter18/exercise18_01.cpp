@@ -14,11 +14,8 @@ int string_length(const char* s) {
 char* strdup(const char* s) {
     int n = string_length(s) + 1;  // + 1 is for the space for '\0' (null character of the string)
     char* dup = new char[n];
-    // deal with the case until n (copy contents of the string)
-    for (int i = 0; i < n; ++i) {
-        *dup++ = *s++;
-        if (i == n - 1) *dup = '\0';  // when it is the last space for the array, end the C-style string with the null character
-    }
+    while (*dup++ = *s++)  // see also 276 page of The C++ Programming Language 4th edition §11.1.4 Increment and Decrement.
+        ;
     dup -= n;  // let the dup pointer to indicate the first char of the C-style string (since did not move the pointer when )
     return dup;
 }
